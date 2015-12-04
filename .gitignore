@@ -1,0 +1,9 @@
+.DS_Store
+.bash_history
+.travis
+www/travis/*
+www/debian/*
+www/uploads/*
+incoming/*
+archive/*
+keys/*

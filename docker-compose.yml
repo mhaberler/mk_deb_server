@@ -1,0 +1,45 @@
+data:
+  container_name: mk_data
+  image: tianon/true
+  volumes:
+    - /data
+
+sftp:
+  container_name: mk_sftp_server
+  build: sftp
+  ports:
+    - "9022:22"
+  volumes:
+    - ./incoming:/data/sftp/shared/incoming
+    - ./keys:/keys
+  volumes_from:
+    - data
+
+reprepro:
+  container_name: mk_reprepro
+  build: reprepro
+  volumes:
+    - ./archive:/archive
+    - ./conf:/conf
+    - ./incoming:/incoming
+    - ./keys:/keys
+  volumes_from:
+    - data
+  links:
+    - sftp
+
+web:
+  container_name: mk_web_server
+  image: nginx
+  ports:
+    - "9080:80"
+    - "9443:443"
+  volumes:
+    - ./www:/usr/share/nginx/html:ro
+    - ./incoming:/usr/share/nginx/html/uploads:ro
+    - ./archive:/usr/share/nginx/html/debian:ro
+    - ./nginx_config/nginx.conf:/etc/nginx/nginx.conf:ro
+    - ./nginx_config/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
+  links:
+    - reprepro
+

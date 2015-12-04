@@ -1,0 +1,13 @@
+UseDNS no
+PermitRootLogin no
+Subsystem sftp internal-sftp
+ChrootDirectory /data
+PermitTunnel no
+AllowAgentForwarding no
+X11Forwarding no
+AllowTcpForwarding no
+ForceCommand internal-sftp -d /sftp
+ChallengeResponseAuthentication no
+PasswordAuthentication no
+UsePAM no
+

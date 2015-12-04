@@ -1,0 +1,16 @@
+Origin: Dovetail Automata LLC
+Label: Machinekit
+Description: Machinekit packages for Wheezy
+  From Dovetail Automata LLC
+  .
+  This archive is updated with the latest Machinekit packages from the
+  Machinekit CI system and dependency packages from the Machinekit
+  dxsbuild scripts.
+  .
+  For more information:
+  http://www.machinekit.io
+Suite: stable
+Codename: wheezy
+Architectures: amd64 i386 armhf source
+Components: main
+SignWith: GPG_SIG

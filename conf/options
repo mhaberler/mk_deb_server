@@ -1,0 +1,8 @@
+verbose
+basedir /archive
+confdir /conf
+dbdir /data/db
+gnupghome /data/.gpg
+keepunusednewfiles
+keepunreferencedfiles
+ask-passphrase

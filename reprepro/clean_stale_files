@@ -1,0 +1,2 @@
+* * * * * root /usr/bin/find /data/{sftp,failed,passed,queue,tmp} -type f -mmin +1440 -exec rm -f {} \;
+
