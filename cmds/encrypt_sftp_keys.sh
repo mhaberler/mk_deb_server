@@ -8,11 +8,8 @@ else
     INTERACTIVE=""
 fi
 
-# remove old files
-rm -rf .travis
-
 # encrypt sftp key
-docker run --rm=true ${INTERACTIVE} -v $(pwd):/home/travis \
+docker run --rm=true ${INTERACTIVE} -v $(pwd):/root \
     -e TRAVIS_TOKEN=${TRAVIS_TOKEN} -e REPO \
     travis-cli sh -c "cmds/encrypt_helper.sh keys/access_key"
 

@@ -9,6 +9,6 @@ RUN apt-get update ; \
     apt-get autoremove -y
 
 RUN useradd -m -s /bin/bash travis
-USER    travis
-WORKDIR /home/travis
+USER    root
+WORKDIR /root
 

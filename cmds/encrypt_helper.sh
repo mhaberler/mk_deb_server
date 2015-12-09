@@ -5,6 +5,9 @@ die () {
     exit 1
 }
 
+# remove old files
+rm -rf .travis
+
 if [ -z "${TRAVIS_TOKEN}" ]; then
     travis login --org || die "Cannot login to travis-ci!"
 else
@@ -17,6 +20,9 @@ ACCESS_TOKEN=`cat ~/.travis/config.yml | grep access_token | sed 's/ *access_tok
 # encrypt ssh access key
 RES=$(travis encrypt-file --org -t ${ACCESS_TOKEN} -f ${1} -r ${REPO} -p 2>/dev/null) || \
     die "No admin access to ${REPO} repository!"
+
+# change file ownership
+chown --reference=${1} `basename ${1}`.enc
 
 find_val () {
     echo ${RES} | awk -v ab="$1" '{for(i=1; i< NF;i++) if ($i == ab) print $(i+1)}'
@@ -38,4 +44,5 @@ travis env --org -t ${ACCESS_TOKEN} -r ${REPO} \
         set encrypted_sftp_iv $(find_val "iv:") -p || \
     die "Cannot set encrypted_sftp_iv!"
 
+rm -rf .travis
 
