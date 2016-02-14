@@ -5,6 +5,7 @@ data:
     - /data
 
 sftp:
+  restart: always
   container_name: mk_sftp_server
   build: sftp
   ports:
@@ -16,6 +17,7 @@ sftp:
     - data
 
 reprepro:
+  restart: always
   container_name: mk_reprepro
   build: reprepro
   volumes:
@@ -29,6 +31,7 @@ reprepro:
     - sftp
 
 web:
+  restart: always
   container_name: mk_web_server
   image: nginx
   ports:
@@ -42,4 +45,3 @@ web:
     - ./nginx_config/conf.d/default.conf:/etc/nginx/conf.d/default.conf:ro
   links:
     - reprepro
-
