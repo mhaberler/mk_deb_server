@@ -13,6 +13,9 @@ rm -f ${TEMP_DIR}/*
 
 # import gpg key
 if [ -f ${KEYS_DIR}/${GPG_KEY} ]; then
+    rm -rf ${GNUPGHOME}
+    mkdir -p ${GNUPGHOME}
+    chmod 0700 ${GNUPGHOME}
     gpg --import ${KEYS_DIR}/${GPG_KEY} || true
     # extract public key
     tmp=$(gpg --fingerprint | grep ^pub)
@@ -32,4 +35,3 @@ service cron start
 
 exec inoticoming --initialsearch --foreground ${INFO_DIR} \
     --regexp "(passed|failed)" /bin/bash  /process.sh {} \;
-

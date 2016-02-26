@@ -12,7 +12,7 @@ SignWith: GPG_SIG
 
 Origin: Machinekit Project
 Label: Machinekit
-Description: Machinekit packages for Wheezy
+Description: Machinekit packages for Jessie
   From Machinekit Project
   .
   http://www.machinekit.io

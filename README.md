@@ -25,6 +25,10 @@ Docker-compose scripts for interfacing with Travis-CI
 
   `travis-cli` will ask for github login details.
   The user must have admin privileges over `<USER/machinekit>`
+ 
+- Add GPG signing key  
+  A passwordless GPG subkey is needed for reprepro. Follow the steps as outlined [here](https://www.gnupg.org/faq/gnupg-faq.html#automated_use) to remove the passphrase. Copy `secring.auto` to `keys/no_passwd_reprepro.key`.
+
 - Startup the docker containers
 
   ```
@@ -54,5 +58,39 @@ Docker-compose scripts for interfacing with Travis-CI
   ```
 - More info about Docker containers can be found [here](https://docs.docker.com/compose/)
 
+## Adding/Removing Packages
+- Determine the name of the running reprepro container:
 
+  ```
+  cd <docker-compose dir>
+  docker-compose ps
+  ```
+  Sample output:
+    ```
+        Name                  Command            State                       Ports
+    --------------------------------------------------------------------------------------------------
+    deb_data          /true                       Exit 0
+    deb_reprepro      /bin/sh -c /run.sh          Up
+    deb_sftp_server   /bin/sh -c /run.sh travis   Up       0.0.0.0:6022->22/tcp
+    deb_web_server    nginx -g daemon off;        Up       0.0.0.0:6443->443/tcp, 0.0.0.0:6080->80/tcp
+    ```
+  The reprepro container is named `deb_reprepro`
 
+- To add a package:
+  - Copy the new package to `<docker-compose dir>/incoming`
+  - Run the following command:
+    ```
+    docker exec <container> reprepro --delete includedeb <suite> /incoming/<package.deb>
+    ```
+    Note:
+  
+      `<container>` - reprepro docker container name  
+      `<suite>`     - debian release (*wheezy*/*jessie*)  
+
+- To remove a package:
+  ```
+  docker exec <container> reprepro remove <suite> <packagename>
+  ```
+  Take note of the debian package naming scheme:
+
+    `<packagename>_<VersionNumber>-<DebianRevisionNumber>_<DebianArchitecture>.deb`
