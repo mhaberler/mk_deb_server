@@ -78,6 +78,7 @@ Docker-compose scripts for hosting the packages built by Travis-CI
 
 - To add a package:
   - Copy the new package to `<mk_deb_server dir>/incoming`
+  - check if the package is signed by running `debsig-verify <package.deb>`
   - If the package has not been signed with the GPG key, run the following command first:
     ```
     docker exec mk_reprepro dpkg-sig -k <GPG_KEY> --sign builder /incoming/<package.deb>
