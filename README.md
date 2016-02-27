@@ -1,5 +1,5 @@
-# mkdebs
-Docker-compose scripts for interfacing with Travis-CI
+# mk_deb_server
+Docker-compose scripts for hosting the packages built by Travis-CI
 
 ## Prerequisites
 - Install `docker-compose` by following the instructions [here](https://docs.docker.com/compose/install/)
@@ -9,12 +9,12 @@ Docker-compose scripts for interfacing with Travis-CI
 - Clone this repository 
 
 	```
-	git clone https://github.com/kinsamanka/mkdebs
+	git clone https://github.com/machinekit/mk_deb_server
 	```
 - Perform initial setup 
 
 	```
-    cd mkdebs
+    cd mk_deb_server
     ./setup.sh
     ```
 - Encrypt sftp access key 
@@ -47,13 +47,13 @@ Docker-compose scripts for interfacing with Travis-CI
 - To shutdown the containers:
 
   ```
-  cd <mkdebs dir>
+  cd <mk_deb_server dir>
   docker-compose stop
   ```
 - To start again:
 
   ```
-  cd <mkdebs dir>
+  cd <mk_deb_server dir>
   docker-compose start
   ```
 - More info about Docker containers can be found [here](https://docs.docker.com/compose/)
@@ -62,7 +62,7 @@ Docker-compose scripts for interfacing with Travis-CI
 - Determine the name of the running reprepro container:
 
   ```
-  cd <docker-compose dir>
+  cd <mk_deb_server dir>
   docker-compose ps
   ```
   Sample output:
@@ -77,7 +77,7 @@ Docker-compose scripts for interfacing with Travis-CI
   The reprepro container is named `deb_reprepro`
 
 - To add a package:
-  - Copy the new package to `<docker-compose dir>/incoming`
+  - Copy the new package to `<mk_deb_server dir>/incoming`
   - If the package has not been signed with the GPG key, run the following command first:
     ```
     docker exec mk_reprepro dpkg-sig -k <GPG_KEY> --sign builder /incoming/<package.deb>
