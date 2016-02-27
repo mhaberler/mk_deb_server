@@ -27,7 +27,7 @@ Docker-compose scripts for hosting the packages built by Travis-CI
   The user must have admin privileges over `<USER/machinekit>`
  
 - Add GPG signing key  
-  A passwordless GPG subkey is needed for reprepro. Follow the steps as outlined [here](https://www.gnupg.org/faq/gnupg-faq.html#automated_use) to remove the passphrase. Copy `secring.auto` to `keys/no_passwd_reprepro.key`. (A better guide can be found [here](https://www.digitalocean.com/community/tutorials/how-to-use-reprepro-for-a-secure-package-repository-on-ubuntu-14-04).
+  A passwordless GPG subkey is needed for reprepro. Follow the steps as outlined [here](https://www.gnupg.org/faq/gnupg-faq.html#automated_use) to remove the passphrase. Copy `secring.auto` to `keys/no_passwd_reprepro.key`. A more detailed guide for setting up a GPG key for passwordless signing can be found [here](https://www.digitalocean.com/community/tutorials/how-to-use-reprepro-for-a-secure-package-repository-on-ubuntu-14-04).
 
 - Startup the docker containers
 
