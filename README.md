@@ -99,3 +99,10 @@ Docker-compose scripts for hosting the packages built by Travis-CI
   Take note of the debian package naming scheme:
 
     `<packagename>_<VersionNumber>-<DebianRevisionNumber>_<DebianArchitecture>.deb`
+  
+  Example: if the package name is `libczmq-dbg_2.2.0-0.6~1jessie~1da_amd64.deb`, remove it by executing:
+  ```
+  docker exec <container> reprepro remove jessie libczmq-dbg
+  ```
+
+  
