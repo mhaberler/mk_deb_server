@@ -78,6 +78,10 @@ Docker-compose scripts for interfacing with Travis-CI
 
 - To add a package:
   - Copy the new package to `<docker-compose dir>/incoming`
+  - If the package has not been signed with the GPG key, run the following command first:
+    ```
+    docker exec mk_reprepro dpkg-sig -k <GPG_KEY> --sign builder /incoming/<package.deb>
+    ```
   - Run the following command:
     ```
     docker exec <container> reprepro --delete includedeb <suite> /incoming/<package.deb>
@@ -86,6 +90,7 @@ Docker-compose scripts for interfacing with Travis-CI
   
       `<container>` - reprepro docker container name  
       `<suite>`     - debian release (*wheezy*/*jessie*)  
+      `<GPG_KEY>`   - public gpg key (this is not the GPG subkey)
 
 - To remove a package:
   ```
